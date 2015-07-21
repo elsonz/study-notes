@@ -195,6 +195,7 @@ $ git stash apply // 恢复后，stash内容并不删除，需要用git stash dr
 $ git stash pop // 恢复的同时把stash内容也删了
 ```
 
+stash的另一种使用场景：当当前分支代码没有commit时，是无法pull代码下来，这时需要先stash
 
 #### 解决冲突
 当在不同的分支，对同一个文件的同一个位置进行了修改，各自commit之后merge时：
