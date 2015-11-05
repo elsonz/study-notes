@@ -55,9 +55,12 @@ $ git branch
 ```
 当使用clone命令克隆一个远程库时，默认情况下，只能看到本地的master分支。
 
+新克隆下来的代码默认master和origin/master是关联的，也就是他们的代码保持同步
+
 如果想要获取dev分支，在上面开发，怎么办？
 ```javascript
-// 必须创建远程origin的dev分支到本地
+// 必须创建本地dev分支，然后将其与远程origin的dev相关联
+// 本地dev分支的初始代码和远程的dev分支代码一样
 $ git checkout -b dev origin/dev
 ```
 
@@ -74,10 +77,14 @@ origin  https://github.com/zfengqi/Spoon-Knife.git (push)
 // 上面显示了可以抓取和推送的origin的地址。如果没有推送权限，就看不到push的地址。
 ```
 
+$ git branch -r // 列出远程分支
+$ git branch -a // 列出本地和远程的所有分支
+
 ####推送分支
 ```javascript
 $ git push origin master // 指定本地分支，然后就会推送到对应的分支去
 $ git push origin dev
+$ git push origin dev:dev 
 ```
 
 ####抓取分支
