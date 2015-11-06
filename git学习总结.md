@@ -1,7 +1,8 @@
 # git 学习总结
-对git基础的学习总结，感谢廖雪峰老师的教程
 
-[http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+- [廖雪峰git教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+- [Git How To](http://githowto.com/)
+
 ##提交到本地版本库
 `git add` & `git commit`
 
@@ -82,9 +83,11 @@ $ git branch -a // 列出本地和远程的所有分支
 
 ####推送分支
 ```javascript
-$ git push origin master // 指定本地分支，然后就会推送到对应的分支去
+$ git push [远程名] [本地分支]:[远程分支]
+$ git push origin master // 指定本地分支，然后就会推送到远程仓库中对应的分支去
 $ git push origin dev
-$ git push origin dev:dev 
+$ git push origin dev:dev // 将本地的dev分支推送到远程的dev分支
+$ git push origin :issue3 // 删除远程origin上的issue3分支
 ```
 
 ####抓取分支
@@ -184,7 +187,11 @@ Fast-forward
  readme.txt |    1 +
  1 file changed, 1 insertion(+)
 ```
+如果没有冲突⽂文件会以 `Fast forward` 的方式顺利合并，
 `Fast-forward` 告诉我们，这次合并是“快进模式”，也就是直接把master指向dev的当前提交，所以合并速度非常快。
+
+如果发⽣生冲突，使⽤用 git status 查看冲突的⽂文件(类似 SVN 状况) 
+解决后，使⽤用 `git add` 标记已完成，并 `git commit` 提交冲突⽂文件
 
 #### 切换分支时出现的状况
 当前分支如果有没add和commit的内容的话，是没法切换到其他分支的
@@ -230,6 +237,20 @@ Git用`<<<<<<<`，`=======`，`>>>>>>>` 标记出不同分支的内容
 
 ``` javascript
 $ git log --graph //可以看到分支合并图。
+```
+## 查看别人上一次提交都改动了些什么
+```javascript
+$ git log // 找到commit对应的md5值
+$ git show ae9821319c7da770574f41a9a608671f2f4cdbcd // 显示改动详情
+$ git show ae9821319c7da770574f41a9a608671f2f4cdbcd --stat // 显示改动概述
+commit ae9821319c7da770574f41a9a608671f2f4cdbcd
+Author: fasdf <sdf@xx.com>
+Date:   Thu Nov 5 20:04:14 2015 +0800
+
+    add file
+
+ src/main/webapp/resources/mock/index.json | 57 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 57 insertions(+)
 ```
 
 ## 常用命令
