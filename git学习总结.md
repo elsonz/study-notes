@@ -137,7 +137,7 @@ $ git reset --hard HEAD~100 // 回滚到前100个版本
     bd0213d HEAD@{3}: clone: from https://github.com/zfengqi/blog-and-note.git
 ```
 
-## 暂存区与工作区之间的修改
+## 暂存区(stage)与工作区(local files)之间的修改
 ####场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改
 **用命令`git checkout -- <file>`**
 
@@ -151,7 +151,7 @@ ps. 修改的是工作区的文件内容，即本地文件。
 ####场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃暂存区关于这个文件的记录
 **分两步**
 
-- 第一步用命令`git reset HEAD <file>`，就回到了场景1,即撤销了对这个文件的add操作！
+- 第一步用命令`git reset HEAD <file>`，就回到了场景1,即**撤销了对这个文件的add操作**！
 - 第二步按场景1操作。
 
 ####场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，版本回滚，不过前提是没有推送到远程库。
@@ -237,6 +237,20 @@ Git用`<<<<<<<`，`=======`，`>>>>>>>` 标记出不同分支的内容
 
 ``` javascript
 $ git log --graph //可以看到分支合并图。
+$ git log --pretty=oneline
+$ git log --pretty=oneline --max-count=2
+$ git log --pretty=oneline --since='5 minutes ago'
+$ git log --pretty=oneline --until='5 minutes ago'
+$ git log --pretty=oneline --author=<your name>
+$ git log --pretty=oneline --all
+
+$ git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short
+// %d commit decorations (e.g. branch heads or tags)
+* fa3c141 2011-03-09 | Added HTML header (HEAD, master) [Alexander Shvets]
+* 8c32287 2011-03-09 | Added standard HTML page tags [Alexander Shvets]
+
+// 添加别名
+$ git config --global alias.hist 'log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
 ```
 ## 查看别人上一次提交都改动了些什么
 ```javascript
