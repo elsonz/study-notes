@@ -155,9 +155,24 @@ ps. 修改的是工作区的文件内容，即本地文件。
 - 第二步按场景1操作。
 
 ####场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，版本回滚，不过前提是没有推送到远程库。
+[http://githowto.com/undoing_committed_changes](http://githowto.com/undoing_committed_changes)
+``` git
+// 取消上一个版本的提交
+$ git revert HEAD
+$ git revert HEAD --no-edit // 无需填写回滚原因
+```
+`HEAD`也可以是其他版本的hash
 
-####注意`git checkout -- <file>`的含义
-`git checkout -- <file>`其实是用版本库里的版本（包括暂存区）替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+此时工作区的文件会被修改，回滚到上一个版本
+
+
+####注意
+#####1. `git checkout -- <file>`的含义
+`git checkout -- <file>`其实是用版本库里的版本（包括stage暂存区）替换工作区的版本。**即如果stage里面有东西，则用stage里面的替换，如果没有则用已经commit到版本库里面的进行替换。** 无论工作区是修改还是删除，都可以“一键还原”。
+
+#####2. `git reset HEAD <file>`的含义
+- The reset command **resets the buffer zone** to HEAD. This clears the buffer zone from the changes that we have just staged.
+- The reset command (default) does not change the working directory. Therefore, the working directory still contains unwanted comments. We can use the checkout command from the previous tutorial to remove unwanted changes from working directory.
 
 ## 创建和合并分支
 #### git分支创建原理
